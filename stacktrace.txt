@@ -1,2 +1,4 @@
-
+nspec. describe Ability. given an Ability. given it has a Modifier. should have Modifier of -4 when value is 2.
+Expected: -4, But was: -5
+   at TDandD.describe_Ability.<given_an_Ability>b__9() in c:\Code\TDandD\TDandD\describe_Ability.cs:line 55
 
