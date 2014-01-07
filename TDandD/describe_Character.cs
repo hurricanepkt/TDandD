@@ -43,6 +43,7 @@ namespace TDandD
 			it["attack is not a CriticalHit when roll is less than a natural 20"] = () => bob.Attack(19, 10).IsCriticalHit.should_be_false();
 		}
 
+		Character joe;
 		void when_an_opponent_attacks()
 		{
 			context["if attack is successful"] = () =>
@@ -69,27 +70,26 @@ namespace TDandD
 
 			context["given a character is near death"] = () =>
 			{
-				Character jim = new Character();
-				before = () => jim.HitPoints = 1;
+				before = () => joe = new Character(hitPoints: 1);
 
 				context["when HitPoints are above zero"] = () =>
 				{
-					before = () => jim.HitPoints = 3;
+					before = () => joe = new Character(hitPoints: 3);
 
-					act = () => jim.ApplyDamage(new AttackResult() { Success = true });
-					it["then character is alive"] = () => jim.IsAlive.should_be_true();
+					act = () => joe.ApplyDamage(new AttackResult() { Success = true });
+					it["then character is alive"] = () => joe.IsAlive.should_be_true();
 				};
 
 				context["when HitPoints fall to zero"] = () =>
 				{
-					act = () => jim.ApplyDamage(new AttackResult() { Success = true });
-					it["then character is dead"] = () => jim.IsAlive.should_be_false();
+					act = () => joe.ApplyDamage(new AttackResult() { Success = true });
+					it["then character is dead"] = () => joe.IsAlive.should_be_false();
 				};
 
 				context["when HitPoints fall below zero"] = () =>
 				{
-					act = () => jim.ApplyDamage(new AttackResult() { Success = true, IsCriticalHit = true });
-					it["then character is dead"] = () => jim.IsAlive.should_be_false();
+					act = () => joe.ApplyDamage(new AttackResult() { Success = true, IsCriticalHit = true });
+					it["then character is dead"] = () => joe.IsAlive.should_be_false();
 				};
 
 			};

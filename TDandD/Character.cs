@@ -7,8 +7,8 @@ namespace TDandD
 {
 	public class Character
 	{
-	  
-	    const int CRITICAL_ROLL = 20;
+
+		const int CRITICAL_ROLL = 20;
 
 		public string Name { get; set; }
 		public AlignmentEnum Alignment { get; set; }
@@ -20,7 +20,11 @@ namespace TDandD
 	        private set { m_armorClass = value; }
 	    }
 
-	    public int HitPoints { get; set; }
+		private int m_hitPoints;
+		public int HitPoints
+		{
+			get { return m_hitPoints; }
+		}
 
 		public bool IsAlive {
 			get { return HitPoints > 0; }
@@ -36,16 +40,20 @@ namespace TDandD
 
 	    public const int DEFAULT_ARMORCLASS = 10;
 	    public const int DEFAULT_HITPOINTS = 5;
-		public Character()
+
+		public Character(int hitPoints = DEFAULT_HITPOINTS)
 		{
             ArmorClass = DEFAULT_ARMORCLASS;
-            HitPoints = DEFAULT_HITPOINTS;
+
 			Strength = new Ability();
 			Dexterity = new Ability();
 			Constitution = new Ability();
 			Wisdom = new Ability();
 			Intelligence = new Ability();
 			Charisma = new Ability();
+
+			SetHitPoints(hitPoints);
+
 		}
 
 		public AttackResult Attack(int unmodifiedRoll, int armorClass)
@@ -72,7 +80,7 @@ namespace TDandD
 		public void ApplyDamage(AttackResult attack)
 		{
 			if (attack.Success)
-				HitPoints = HitPoints - CalculateDamage(attack);
+				ApplyDamageToHitPoints(HitPoints - CalculateDamage(attack));
 		}
 
 	 
@@ -91,6 +99,21 @@ namespace TDandD
 				return 1;
 
 			return damage;
+		}
+
+		private void ApplyDamageToHitPoints(int hitPoints)
+		{
+			if(hitPoints > 0)
+			{
+				m_hitPoints = hitPoints;
+			}
+
+			m_hitPoints = 0;
+		}
+
+		private void SetHitPoints(int hitPoints)
+		{
+			m_hitPoints = hitPoints + Constitution.Modifier;
 		}
 	}
 }
