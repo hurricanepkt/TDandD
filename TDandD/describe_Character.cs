@@ -48,7 +48,7 @@ namespace TDandD
 			{
 				Character jim = new Character();
 				act = () => jim.DefendAttack(15);
-				it["then character takes 1 point of damage"] = () => jim.HitPoints.should_be(5);
+				it["then character takes 1 point of damage"] = () => jim.HitPoints.should_be(4);
 				it["then character takes 1 point of damage"] = () => jim.HitPoints.should_be(3);
 			};
 
@@ -97,7 +97,16 @@ namespace TDandD
 		}
 
 
+        void when_strength_modifier_applies()
+        {
+            context["given Strength Value is 20"] = () =>
+            {
+                before = () => bob.Strength.Value = 20;
+                it["attack roll should be higher"] = () => bob.Attack(5, 10).should_be_true();
+            };
 
+
+        }
 
 	}
 }
