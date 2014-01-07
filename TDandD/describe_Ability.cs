@@ -49,6 +49,11 @@ namespace TDandD
                     ability.Value = 1;
                     ability.Modifier.should_be(-5);
                 };
+				it["should have Modifier of -4 when value is 2"] = () =>
+				{
+					ability.Value = 2;
+					ability.Modifier.should_be(-4);
+				};
             };
         }
     }
