@@ -54,6 +54,8 @@
     <Compile Include="DebuggerShim.cs" />
     <Compile Include="describe_Ability.cs" />
     <Compile Include="describe_Character.cs" />
+    <Compile Include="describe_CharacterConstitution.cs" />
+    <Compile Include="describe_CharacterDexterity.cs" />
     <Compile Include="NSpecExamples\custom_assertions.cs" />
     <Compile Include="NSpecExamples\describe_before.cs" />
     <Compile Include="NSpecExamples\describe_contexts.cs" />

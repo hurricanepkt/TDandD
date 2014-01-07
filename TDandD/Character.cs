@@ -7,12 +7,20 @@ namespace TDandD
 {
 	public class Character
 	{
-		const int CRITICAL_ROLL = 20;
+	  
+	    const int CRITICAL_ROLL = 20;
 
 		public string Name { get; set; }
 		public AlignmentEnum Alignment { get; set; }
-		public int ArmorClass { get; set; }
-		public int HitPoints { get; set; }
+
+        private int m_armorClass;
+	    public int ArmorClass
+	    {
+	        get { return m_armorClass + Dexterity.Modifier; }
+	        private set { m_armorClass = value; }
+	    }
+
+	    public int HitPoints { get; set; }
 
 		public bool IsAlive {
 			get { return HitPoints > 0; }
@@ -25,10 +33,13 @@ namespace TDandD
 		public Ability Intelligence { get; set; }
 		public Ability Charisma { get; set; }
 
+
+	    public const int DEFAULT_ARMORCLASS = 10;
+	    public const int DEFAULT_HITPOINTS = 5;
 		public Character()
 		{
-			ArmorClass = 10;
-			HitPoints = 5;
+            ArmorClass = DEFAULT_ARMORCLASS;
+            HitPoints = DEFAULT_HITPOINTS;
 			Strength = new Ability();
 			Dexterity = new Ability();
 			Constitution = new Ability();
