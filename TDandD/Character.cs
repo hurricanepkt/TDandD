@@ -39,14 +39,24 @@ namespace TDandD
 
 		public AttackResult Attack(int unmodifiedRoll, int armorClass)
 		{
-			return new AttackResult
+            var critical = (unmodifiedRoll == CRITICAL_ROLL);
+		    var modifier = ModifierCalc(critical, Strength.Modifier);
+            var success = unmodifiedRoll + modifier >= armorClass;
+
+            return new AttackResult
 			{
-				Success = unmodifiedRoll + Strength.Modifier >= armorClass,
-                IsCriticalHit = (unmodifiedRoll == CRITICAL_ROLL),
-                UnmodifiedRoll =  unmodifiedRoll,
-				AttackModifier = Strength.Modifier
+			    Success =  success,
+                IsCriticalHit =  critical,
+                AttackModifier = modifier
 			};
 		}
+
+        private int ModifierCalc(bool critical, int modifier)
+        {
+            if (!critical)
+                return modifier;
+            return modifier * 2;
+        }
 
 	    public void ApplyDamage(AttackResult attack)
 	    {

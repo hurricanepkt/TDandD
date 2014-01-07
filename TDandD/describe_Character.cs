@@ -99,7 +99,7 @@ namespace TDandD
 
 
 		AttackResult result;
-        void when_strength_modifier_applies()
+        void when_strength_modifier_applies() 
         {
             context["when attacking"] = () =>
             {
@@ -162,15 +162,20 @@ namespace TDandD
 				context["given AttackModifier of -1"] = () =>
 				{
 					act = () => bob.ApplyDamage(new AttackResult { Success = true, AttackModifier = -1 });
-					it["success attack should do 0 damage"] = () => bob.HitPoints.should_be(5);
+					it["success attack should do 1 damage"] = () => bob.HitPoints.should_be(4);
 				};
-
-				context["given AttackModifier of 0"] = () =>
+                 
+				context["given AttackModifier of 0"] = () =>  
 				{
 					act = () => bob.ApplyDamage(new AttackResult { Success = true, AttackModifier = 0 });
 					it["success attack should do 1 damage"] = () => bob.HitPoints.should_be(4);
 				};
 
+                context["given AttackModifier of -5"] = () =>
+                {
+                    act = () => bob.ApplyDamage(new AttackResult { Success = true, AttackModifier = -5 });
+                    it["success attack should do 1 damage"] = () => bob.HitPoints.should_be(4);
+                };
             };
 
         }
