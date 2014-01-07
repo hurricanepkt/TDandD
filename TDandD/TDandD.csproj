@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Ability.cs" />
     <Compile Include="AlignmentEnum.cs" />
+    <Compile Include="AttackResult.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="DebuggerShim.cs" />
     <Compile Include="describe_Ability.cs" />

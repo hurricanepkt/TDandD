@@ -36,10 +36,11 @@ namespace TDandD
 
 		void when_attacking_another_combatant()
 		{
-			it["when roll is less than opponents ArmorClass"] = () => bob.Attack(5, 10).should_be_false();
-			it["when roll is more than opponents ArmorClass"] = () => bob.Attack(15, 10).should_be_true();
-			it["when roll is the same as than opponents ArmorClass"] = () => bob.Attack(10, 10).should_be_true();
-
+			it["attack is unsuccessful when roll is less than opponents ArmorClass"] = () => bob.Attack(5, 10).Success.should_be_false();
+			it["attack is successful when roll is more than opponents ArmorClass"] = () => bob.Attack(15, 10).Success.should_be_true();
+			it["attack is successful when roll is the same as than opponents ArmorClass"] = () => bob.Attack(10, 10).Success.should_be_true();
+			it["attack is a CriticalHit when roll is a natural 20"] = () => bob.Attack(20, 10).IsCriticalHit.should_be_true();
+			it["attack is not a CriticalHit when roll is less than a natural 20"] = () => bob.Attack(20, 10).IsCriticalHit.should_be_false();
 		}
 
 		void when_an_opponent_attacks()
@@ -97,16 +98,53 @@ namespace TDandD
 		}
 
 
-        void when_strength_modifier_applies()
-        {
-            context["given Strength Value is 20"] = () =>
-            {
-                before = () => bob.Strength.Value = 20;
-                it["attack roll should be higher"] = () => bob.Attack(5, 10).should_be_true();
-            };
+		void when_strength_modifier_applies()
+		{
+			context["when attacking"] = () =>
+			{
+				context["given Strength Value is 20"] = () =>
+				{
+					before = () => bob.Strength.Value = 20;
+					it["attack roll should be higher"] = () => bob.Attack(5, 10).Success.should_be_true();
+				};
 
+				context["given Strength Value is 1"] = () =>
+				{
+					before = () => bob.Strength.Value = 1;
+					it["attack roll should be lowered"] = () => bob.Attack(12, 10).Success.should_be_false();
+				};
 
-        }
+				context["given Strength Value is 10"] = () =>
+				{
+					before = () => bob.Strength.Value = 10;
+					it["attack roll should be unmodified"] = () => bob.Attack(10, 10).Success.should_be_true();
+					it["attack roll should be unmodified"] = () => bob.Attack(9, 10).Success.should_be_false();
+				};
+			};
+
+			context["when defending"] = () =>
+			{
+				context["given Strength Value is 20"] = () =>
+				{
+					before = () => bob.Strength.Value = 20;
+					it["attack roll should be higher"] = () => bob.Attack(5, 10).Success.should_be_true();
+				};
+
+				context["given Strength Value is 1"] = () =>
+				{
+					before = () => bob.Strength.Value = 1;
+					it["attack roll should be lowered"] = () => bob.Attack(12, 10).Success.should_be_false();
+				};
+
+				context["given Strength Value is 10"] = () =>
+				{
+					before = () => bob.Strength.Value = 10;
+					it["attack roll should be unmodified"] = () => bob.Attack(10, 10).Success.should_be_true();
+					it["attack roll should be unmodified"] = () => bob.Attack(9, 10).Success.should_be_false();
+				};
+			};
+
+		}
 
 	}
 }
