@@ -37,28 +37,27 @@ namespace TDandD
 			Charisma = new Ability();
 		}
 
-		// TODO: change return from bool to AttackResult
-		// TODO: AttackResult should return success and if critical hit
-		public AttackResult Attack(int roll, int armorClass)
+		public AttackResult Attack(int unmodifiedRoll, int armorClass)
 		{
 			return new AttackResult
 			{
-				Success = roll + Strength.Modifier >= armorClass
+				Success = unmodifiedRoll + Strength.Modifier >= armorClass,
+                IsCriticalHit = (unmodifiedRoll == CRITICAL_ROLL),
+                UnmodifiedRoll =  unmodifiedRoll
 			};
 		}
-		// TODO: change to be ApplyDamage?
-		// TODO: Should take an AttackResult, Attacker
-		public void DefendAttack(int unmodifiedRoll) 
-		{
-			var isAHit = Attack(unmodifiedRoll, ArmorClass);
 
-			if(isAHit.Success)
-				HitPoints = HitPoints - CalculateDamage(unmodifiedRoll);
-		}
+	    public void ApplyDamage(AttackResult attack)
+	    {
+	        if (attack.Success)
+	            HitPoints = HitPoints - CalculateDamage(attack.IsCriticalHit);
+	    }
+
+     
 		
-		private static int CalculateDamage(int unmodifiedRoll)
+		private static int CalculateDamage(bool isCriticalHit)
 		{
-			return unmodifiedRoll == CRITICAL_ROLL ? 2 : 1;
+			return isCriticalHit ? 2 : 1;
 		}
 	}
 }
