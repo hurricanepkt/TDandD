@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 TDandD/obj/Debug/TDandD.csproj.FileListAbsolute.txt
-stacktrace.txt
-=======
 ###################
 # compiled source #
 ###################
@@ -67,4 +64,4 @@ Thumbs.db
 /Tests/obj/Debug/Tests.csproj.FileListAbsolute.txt
 /Tests/obj/Debug/Tests.dll
 !sidekickapp.exe
->>>>>>> fe69455ae943b273b266fbfa8eae711a174f9598
+stacktrace.txt
