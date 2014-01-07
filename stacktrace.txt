@@ -1,8 +1,0 @@
-nspec. describe Character. when Dexterity modifier applies. given Dexterity Value is 20. ArmorClass should be increased by 5.
-Expected: 15, But was: 10
-   at TDandD.describe_Character.<when_Dexterity_modifier_applies>b__60() in c:\Code\TDandD\TDandD\describe_Character.cs:line 188
-
-nspec. describe Character. when Dexterity modifier applies. given Dexterity Value is 1. ArmorClass should be decreased by 5.
-Expected: 5, But was: 10
-   at TDandD.describe_Character.<when_Dexterity_modifier_applies>b__63() in c:\Code\TDandD\TDandD\describe_Character.cs:line 194
-
