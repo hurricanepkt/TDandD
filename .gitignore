@@ -62,3 +62,4 @@ Thumbs.db
 /RiPS/App_Data/WCAcordAOS.old.pdf
 /Tests/obj/Debug/Tests.csproj.FileListAbsolute.txt
 /Tests/obj/Debug/Tests.dll
+!sidekickapp.exe
