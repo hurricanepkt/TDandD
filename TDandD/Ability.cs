@@ -24,5 +24,6 @@ namespace TDandD
 		{
 			Value = DEFAULT_VALUE;
 		}
+
 	}
 }
