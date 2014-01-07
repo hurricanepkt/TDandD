@@ -122,26 +122,27 @@ namespace TDandD
                 };
             };
 
-            context["when defending"] = () =>
+            context["when applying damage"] = () =>
             {
-                context["given Strength Value is 20"] = () =>
+                context["given Strength Value is 13"] = () =>
                 {
-                    before = () => bob.Strength.Value = 20;
-                    it["attack roll should be higher"] = () => bob.Attack(5, 10).Success.should_be_true();
+                    before = () => bob.Strength.Value = 13;
+                    act = () => bob.ApplyDamage(new AttackResult {Success = true});
+                    it["success damage should be 2"] = () => bob.HitPoints.should_be(3);
                 };
 
-                context["given Strength Value is 1"] = () =>
-                {
-                    before = () => bob.Strength.Value = 1;
-                    it["attack roll should be lowered"] = () => bob.Attack(12, 10).Success.should_be_false();
-                };
+                //context["given Strength Value is 1"] = () =>
+                //{
+                //    before = () => bob.Strength.Value = 1;
+                //    it["attack roll should be lowered"] = () => bob.Attack(12, 10).Success.should_be_false();
+                //};
 
-                context["given Strength Value is 10"] = () =>
-                {
-                    before = () => bob.Strength.Value = 10;
-                    it["attack roll should be unmodified"] = () => bob.Attack(10, 10).Success.should_be_true();
-                    it["attack roll should be unmodified"] = () => bob.Attack(9, 10).Success.should_be_false();
-                };
+                //context["given Strength Value is 10"] = () =>
+                //{
+                //    before = () => bob.Strength.Value = 10;
+                //    it["attack roll should be unmodified"] = () => bob.Attack(10, 10).Success.should_be_true();
+                //    it["attack roll should be unmodified"] = () => bob.Attack(9, 10).Success.should_be_false();
+                //};
             };
 
         }
