@@ -39,32 +39,32 @@ namespace TDandD
 
 		public AttackResult Attack(int unmodifiedRoll, int armorClass)
 		{
-            var critical = (unmodifiedRoll == CRITICAL_ROLL);
-		    var modifier = ModifierCalc(critical, Strength.Modifier);
-            var success = unmodifiedRoll + modifier >= armorClass;
+			var critical = (unmodifiedRoll == CRITICAL_ROLL);
+			var modifier = ModifierCalc(critical, Strength.Modifier);
+			var success = unmodifiedRoll + modifier >= armorClass;
 
-            return new AttackResult
+			return new AttackResult
 			{
-			    Success =  success,
-                IsCriticalHit =  critical,
-                AttackModifier = modifier
+				Success =  success,
+				IsCriticalHit =  critical,
+				AttackModifier = modifier
 			};
 		}
 
-        private int ModifierCalc(bool critical, int modifier)
-        {
-            if (!critical)
-                return modifier;
-            return modifier * 2;
-        }
+		private int ModifierCalc(bool critical, int modifier)
+		{
+			if (!critical)
+				return modifier;
+			return modifier * 2;
+		}
 
-	    public void ApplyDamage(AttackResult attack)
-	    {
-	        if (attack.Success)
-	            HitPoints = HitPoints - CalculateDamage(attack);
-	    }
+		public void ApplyDamage(AttackResult attack)
+		{
+			if (attack.Success)
+				HitPoints = HitPoints - CalculateDamage(attack);
+		}
 
-     
+	 
 		
 		private static int CalculateDamage(AttackResult attack)
 		{
@@ -75,6 +75,9 @@ namespace TDandD
 			// This should alway be last (for now)
 			if(attack.IsCriticalHit)
 				damage = damage * 2;
+
+			if(damage < 1)
+				return 1;
 
 			return damage;
 		}

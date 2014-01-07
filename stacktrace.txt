@@ -1,8 +1,2 @@
-nspec. describe Character. when strength modifier applies. when applying damage. given AttackModifier of -1. success attack should do 1 damage.
-Expected: 4, But was: 5
-   at TDandD.describe_Character.<when_strength_modifier_applies>b__57() in c:\Users\mgree_000\Repos\TDandD\TDandD\describe_Character.cs:line 165
 
-nspec. describe Character. when strength modifier applies. when applying damage. given AttackModifier of -5. success attack should do 1 damage.
-Expected: 4, But was: 9
-   at TDandD.describe_Character.<when_strength_modifier_applies>b__5d() in c:\Users\mgree_000\Repos\TDandD\TDandD\describe_Character.cs:line 177
 
