@@ -1,0 +1,9 @@
+C:\Code\Codemash\TDD\TDandD\TDandD\obj\Debug\TDandD.csprojResolveAssemblyReference.cache
+C:\Code\Codemash\TDD\TDandD\TDandD\bin\Debug\TDandD.dll
+C:\Code\Codemash\TDD\TDandD\TDandD\bin\Debug\TDandD.pdb
+C:\Code\Codemash\TDD\TDandD\TDandD\bin\Debug\FluentAssertions.dll
+C:\Code\Codemash\TDD\TDandD\TDandD\bin\Debug\NSpec.dll
+C:\Code\Codemash\TDD\TDandD\TDandD\bin\Debug\FluentAssertions.pdb
+C:\Code\Codemash\TDD\TDandD\TDandD\bin\Debug\FluentAssertions.xml
+C:\Code\Codemash\TDD\TDandD\TDandD\obj\Debug\TDandD.dll
+C:\Code\Codemash\TDD\TDandD\TDandD\obj\Debug\TDandD.pdb

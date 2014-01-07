@@ -1,0 +1,4 @@
+nspec. describe Character. when an opponent attacks. if attack is successful. then character takes 1 point of damage.
+Expected: 5, But was: 4
+   at TDandD.describe_Character.<>c__DisplayClass25.<when_an_opponent_attacks>b__10() in c:\Code\Codemash\TDD\TDandD\TDandD\describe_Character.cs:line 51
+
