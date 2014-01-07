@@ -126,29 +126,51 @@ namespace TDandD
 					it["AttackModifier should be zero"] = () => bob.Attack(10, 10).AttackModifier.should_be(0);
 					it["attack roll should be unmodified"] = () => bob.Attack(9, 10).Success.should_be_false();
                 };
+
+
+				context["given attack is a CriticalHit"] = () =>
+				{
+					act = () => result = bob.Attack(20, 10);
+					context["given Strength of 12"] = () =>
+					{
+						before = () => bob.Strength.Value = 12;
+						it["AttackModifier should be 2"] = () => result.AttackModifier.should_be(2);
+					};
+
+					context["given Strength of 8"] = () =>
+					{
+						before = () => bob.Strength.Value = 8;
+						it["AttackModifier should be -2"] = () => result.AttackModifier.should_be(-2);
+					};
+
+					context["given Strength of 10"] = () =>
+					{
+						before = () => bob.Strength.Value = 10;
+						it["AttackModifier should be 0"] = () => result.AttackModifier.should_be(0);
+					};
+				};
             };
 
             context["when applying damage"] = () =>
             {
-                context["given Strength Value is 13"] = () =>
+                context["given AttackModifier of 1"] = () =>
                 {
-                    before = () => bob.Strength.Value = 13;
                     act = () => bob.ApplyDamage(new AttackResult { Success = true, AttackModifier = 1});
                     it["success attack should do 2 damage"] = () => bob.HitPoints.should_be(3);
                 };
 
-                //context["given Strength Value is 1"] = () =>
-                //{
-                //    before = () => bob.Strength.Value = 1;
-                //    it["attack roll should be lowered"] = () => bob.Attack(12, 10).Success.should_be_false();
-                //};
+				context["given AttackModifier of -1"] = () =>
+				{
+					act = () => bob.ApplyDamage(new AttackResult { Success = true, AttackModifier = -1 });
+					it["success attack should do 0 damage"] = () => bob.HitPoints.should_be(5);
+				};
 
-                //context["given Strength Value is 10"] = () =>
-                //{
-                //    before = () => bob.Strength.Value = 10;
-                //    it["attack roll should be unmodified"] = () => bob.Attack(10, 10).Success.should_be_true();
-                //    it["attack roll should be unmodified"] = () => bob.Attack(9, 10).Success.should_be_false();
-                //};
+				context["given AttackModifier of 0"] = () =>
+				{
+					act = () => bob.ApplyDamage(new AttackResult { Success = true, AttackModifier = 0 });
+					it["success attack should do 1 damage"] = () => bob.HitPoints.should_be(4);
+				};
+
             };
 
         }
