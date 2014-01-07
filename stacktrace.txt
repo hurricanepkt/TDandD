@@ -1,4 +1,2 @@
-nspec. describe Character. when strength modifier applies. when applying damage. given Strength Value is 13. success damage should be 2.
-Expected: 3, But was: 4
-   at TDandD.describe_Character.<when_strength_modifier_applies>b__42() in c:\Users\mgree_000\Repos\TDandD\TDandD\describe_Character.cs:line 131
+
 

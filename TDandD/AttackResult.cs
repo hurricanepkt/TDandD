@@ -10,5 +10,6 @@ namespace TDandD
 		public bool Success { get; set; }
 		public bool IsCriticalHit { get; set; }
         public int UnmodifiedRoll { get; set; }
+		public int AttackModifier { get; set; }
     }
 }

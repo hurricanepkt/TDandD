@@ -43,21 +43,30 @@ namespace TDandD
 			{
 				Success = unmodifiedRoll + Strength.Modifier >= armorClass,
                 IsCriticalHit = (unmodifiedRoll == CRITICAL_ROLL),
-                UnmodifiedRoll =  unmodifiedRoll
+                UnmodifiedRoll =  unmodifiedRoll,
+				AttackModifier = Strength.Modifier
 			};
 		}
 
 	    public void ApplyDamage(AttackResult attack)
 	    {
 	        if (attack.Success)
-	            HitPoints = HitPoints - CalculateDamage(attack.IsCriticalHit);
+	            HitPoints = HitPoints - CalculateDamage(attack);
 	    }
 
      
 		
-		private static int CalculateDamage(bool isCriticalHit)
+		private static int CalculateDamage(AttackResult attack)
 		{
-			return isCriticalHit ? 2 : 1;
+			var damage = 1;
+
+			damage = damage + attack.AttackModifier;
+
+			// This should alway be last (for now)
+			if(attack.IsCriticalHit)
+				damage = damage * 2;
+
+			return damage;
 		}
 	}
 }
