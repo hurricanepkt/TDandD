@@ -20,6 +20,12 @@ namespace TDandD
 			}
 		}
 
+		public int Modifier { 
+			get {
+				return -5;
+			} 
+		}
+
 		public Ability()
 		{
 			Value = DEFAULT_VALUE;
