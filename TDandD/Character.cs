@@ -43,10 +43,14 @@ namespace TDandD
 
 		public Character(
 			int hitPoints = DEFAULT_HITPOINTS,
-			int constitution = Ability.DEFAULT_VALUE)
+			int armorClass = DEFAULT_ARMORCLASS,
+			int strength = Ability.DEFAULT_VALUE,
+			int dexterity = Ability.DEFAULT_VALUE,
+			int constitution = Ability.DEFAULT_VALUE,
+			int wisdom = Ability.DEFAULT_VALUE,
+			int intelligence = Ability.DEFAULT_VALUE,
+			int charisma = Ability.DEFAULT_VALUE)
 		{
-			ArmorClass = DEFAULT_ARMORCLASS;
-
 			Strength = new Ability();
 			Dexterity = new Ability();
 			Constitution = new Ability(constitution);
@@ -54,6 +58,7 @@ namespace TDandD
 			Intelligence = new Ability();
 			Charisma = new Ability();
 
+			ArmorClass = armorClass;
 			SetHitPoints(hitPoints);
 
 		}
@@ -109,8 +114,10 @@ namespace TDandD
 			{
 				m_hitPoints = hitPoints;
 			}
-
-			m_hitPoints = 0;
+			else
+			{
+				m_hitPoints = 0;
+			}
 		}
 
 		private void SetHitPoints(int hitPoints)
