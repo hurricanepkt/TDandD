@@ -14,9 +14,15 @@ namespace TDandD
         void when_Constitution_modifier_applies()
         {
             context["given Constitution Value is 20"] = () =>
-            {
+            {   
                 before = () => bob.Constitution.Value = 20;
                 it["HitPoints should be increased by 5"] = () => bob.HitPoints.should_be(default_HitPoints + 5);
+                context["should take damage with modifier"] = () =>
+                {
+                    act = () => bob.ApplyDamage(new AttackResult() {AttackModifier = 0, Success = true});
+                    it["HitPoints should be increased by 5 then decreased by 1"] =
+                        () => bob.HitPoints.should_be(default_HitPoints + 5 - 1);
+                };
             };
 
             context["given Constitution Value is 1"] = () =>
@@ -27,7 +33,7 @@ namespace TDandD
 
             context["given Constitution Value is 10"] = () =>
             {
-                before = () => bob.Constitution.Value = 10;
+                before = () => bob.Constitution.Value = 10; 
                 it["HitPoints should remain the same"] = () => bob.HitPoints.should_be(default_HitPoints);
             };
         }

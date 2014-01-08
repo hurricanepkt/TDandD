@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -21,9 +22,10 @@ namespace TDandD
 	    }
 
 		private int m_hitPoints;
+	    private readonly int m_startHitPoints;
 		public int HitPoints
 		{
-			get { return m_hitPoints; }
+            get { return m_startHitPoints + Constitution.Modifier; }
 		}
 
 		public bool IsAlive {
@@ -32,8 +34,10 @@ namespace TDandD
 
 		public Ability Strength { get; set; }
 		public Ability Dexterity { get; set; }
-		public Ability Constitution { get; set; }
-		public Ability Wisdom { get; set; }
+
+	    public Ability Constitution { get; set; }
+
+	    public Ability Wisdom { get; set; }
 		public Ability Intelligence { get; set; }
 		public Ability Charisma { get; set; }
 
@@ -51,9 +55,7 @@ namespace TDandD
 			Wisdom = new Ability();
 			Intelligence = new Ability();
 			Charisma = new Ability();
-
-			SetHitPoints(hitPoints);
-
+		    m_startHitPoints = hitPoints;
 		}
 
 		public AttackResult Attack(int unmodifiedRoll, int armorClass)
@@ -109,11 +111,6 @@ namespace TDandD
 			}
 
 			m_hitPoints = 0;
-		}
-
-		private void SetHitPoints(int hitPoints)
-		{
-			m_hitPoints = hitPoints + Constitution.Modifier;
 		}
 	}
 }
