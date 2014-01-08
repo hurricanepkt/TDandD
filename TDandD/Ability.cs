@@ -7,7 +7,7 @@ namespace TDandD
 {
 	public class Ability
 	{
-		const int DEFAULT_VALUE = 10;
+		public const int DEFAULT_VALUE = 10;
 		private int m_value;
 		public int Value
 		{
@@ -37,5 +37,9 @@ namespace TDandD
 			Value = DEFAULT_VALUE;
 		}
 
+		public Ability(int value)
+		{
+			Value = value;
+		}
 	}
 }

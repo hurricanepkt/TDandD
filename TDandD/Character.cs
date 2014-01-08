@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -14,18 +13,17 @@ namespace TDandD
 		public string Name { get; set; }
 		public AlignmentEnum Alignment { get; set; }
 
-        private int m_armorClass;
-	    public int ArmorClass
-	    {
-	        get { return m_armorClass + Dexterity.Modifier; }
-	        private set { m_armorClass = value; }
-	    }
+		private int m_armorClass;
+		public int ArmorClass
+		{
+			get { return m_armorClass + Dexterity.Modifier; }
+			private set { m_armorClass = value; }
+		}
 
 		private int m_hitPoints;
-	    private readonly int m_startHitPoints;
 		public int HitPoints
 		{
-            get { return m_startHitPoints + Constitution.Modifier; }
+			get { return m_hitPoints; }
 		}
 
 		public bool IsAlive {
@@ -34,28 +32,30 @@ namespace TDandD
 
 		public Ability Strength { get; set; }
 		public Ability Dexterity { get; set; }
-
-	    public Ability Constitution { get; set; }
-
-	    public Ability Wisdom { get; set; }
+		public Ability Constitution { get; set; }
+		public Ability Wisdom { get; set; }
 		public Ability Intelligence { get; set; }
 		public Ability Charisma { get; set; }
 
 
-	    public const int DEFAULT_ARMORCLASS = 10;
-	    public const int DEFAULT_HITPOINTS = 5;
+		public const int DEFAULT_ARMORCLASS = 10;
+		public const int DEFAULT_HITPOINTS = 5;
 
-		public Character(int hitPoints = DEFAULT_HITPOINTS)
+		public Character(
+			int hitPoints = DEFAULT_HITPOINTS,
+			int constitution = Ability.DEFAULT_VALUE)
 		{
-            ArmorClass = DEFAULT_ARMORCLASS;
+			ArmorClass = DEFAULT_ARMORCLASS;
 
 			Strength = new Ability();
 			Dexterity = new Ability();
-			Constitution = new Ability();
+			Constitution = new Ability(constitution);
 			Wisdom = new Ability();
 			Intelligence = new Ability();
 			Charisma = new Ability();
-		    m_startHitPoints = hitPoints;
+
+			SetHitPoints(hitPoints);
+
 		}
 
 		public AttackResult Attack(int unmodifiedRoll, int armorClass)
@@ -111,6 +111,11 @@ namespace TDandD
 			}
 
 			m_hitPoints = 0;
+		}
+
+		private void SetHitPoints(int hitPoints)
+		{
+			m_hitPoints = hitPoints + Constitution.Modifier;
 		}
 	}
 }
